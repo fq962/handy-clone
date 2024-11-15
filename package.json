@@ -1,0 +1,19 @@
+{
+  "name": "code-exitos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "workspaces": [
+    "handy-api",
+    "handy-app"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "dev:app": "npm run dev --workspace=handy-app",
+    "dev:api": "npm run dev --workspace=handy-api",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

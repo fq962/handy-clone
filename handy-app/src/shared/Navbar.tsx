@@ -1,32 +1,51 @@
-import React from "react";
+// src/components/Navbar.tsx
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number; // Tamaño personalizable
-  color?: string; // Color personalizable
-}
+const Navbar = () => {
+  return (
+    <Box
+      as="nav"
+      py={4}
+      px={8}
+      boxShadow="sm"
+      borderBottom="1px"
+      borderColor="gray.200"
+    >
+      <Flex justify="space-between" align="center">
+        {/* Logo */}
+        <Box>
+          <Text fontSize="2xl" fontWeight="bold" color="blue.500">
+            handy
+          </Text>
+        </Box>
 
-const MenuIcon: React.FC<IconProps> = ({
-  size = 24,
-  color = "currentColor",
-  ...props
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M4 6l16 0" />
-    <path d="M4 12l16 0" />
-    <path d="M4 18l16 0" />
-  </svg>
-);
+        {/* Right Links */}
+        <Flex gap={8} align="center">
+          <Link
+            fontWeight="medium"
+            color="gray.600"
+            _hover={{ color: "gray.800" }}
+          >
+            Become a Pro
+          </Link>
+          <Link
+            fontWeight="medium"
+            color="gray.600"
+            _hover={{ color: "gray.800" }}
+          >
+            Help
+          </Link>
+          <Link
+            fontWeight="medium"
+            color="gray.600"
+            _hover={{ color: "gray.800" }}
+          >
+            Log In
+          </Link>
+        </Flex>
+      </Flex>
+    </Box>
+  );
+};
 
-export default MenuIcon;
+export default Navbar;

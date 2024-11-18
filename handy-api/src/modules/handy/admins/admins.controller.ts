@@ -14,12 +14,12 @@ export class AdminsController {
     return this.adminsService.CreateHandyman(bodyParams);
   }
 
-  @Patch()
+  @Patch('/UpdateJobRequest')
   async UpdateJobRequest(@Body() bodyParams: UpdateJobRequestDTO) {
     return this.adminsService.UpdateJobRequest(bodyParams);
   }
 
-  @Get()
+  @Get('/GetRequestedJobs')
   async GetRequestedJobs() {
     return this.adminsService.GetRequestedJobs();
   }

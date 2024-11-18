@@ -1,3 +1,4 @@
+import JobRequestTable from "@/shared/components/JobRequestTable";
 import ServiceButtons from "@/shared/components/ServiceButtons";
 import TaskSection from "@/shared/components/TaskSection";
 import HeroSection from "@/shared/HeroSection";
@@ -10,9 +11,10 @@ const Home: React.FC = () => {
   return (
     <Box>
       <Navbar />
-      <HeroSection />
+      <JobRequestTable />
+      {/* <HeroSection />
       <ServiceButtons />
-      <TaskSection />
+      <TaskSection /> */}
     </Box>
   );
 };

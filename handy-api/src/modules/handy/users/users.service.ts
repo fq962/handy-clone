@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from 'src/modules/database/supabase.service';
 import { CreateNewJobRequestDTO } from './dtos/create-job-request.dto';
-import { DB_CREATE_RESPONSE } from 'src/utils/db-response';
+import { DB_CREATE_RESPONSE, DB_GET_RESPONSE } from 'src/utils/db-response';
 // import { DB_RESPONSE } from 'src/utils/db-response';
 
 const SCHEMA = 'public';
@@ -18,8 +18,6 @@ export class UsersService {
   }
 
   async CreateJobRequest(bodyParams: CreateNewJobRequestDTO) {
-    console.log(bodyParams);
-
     const { data, error } = await this.supabase
       .schema(SCHEMA)
       .rpc('ft_create_new_job_request', { p_data: bodyParams });
@@ -29,5 +27,22 @@ export class UsersService {
     }
 
     return new DB_CREATE_RESPONSE(data, 'Job', null, 'Creado').sendResponse();
+  }
+
+  async GetLimitJobTypes() {
+    const { data, error } = await this.supabase
+      .schema(SCHEMA)
+      .rpc('ft_get_most_used_services');
+
+    if (error) {
+      return new DB_GET_RESPONSE(
+        null,
+        'Job Types',
+        error,
+        'Error',
+      ).sendResponse();
+    }
+
+    return new DB_GET_RESPONSE(data, 'Job Types', null, 'Get').sendResponse();
   }
 }

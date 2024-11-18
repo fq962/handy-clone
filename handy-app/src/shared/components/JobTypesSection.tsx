@@ -1,4 +1,5 @@
 // src/components/TaskSection.tsx
+import { GetLimitJobTypes } from "@/core/services/JobRequest";
 import {
   Box,
   Text,
@@ -9,30 +10,37 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { JobType } from "../interfaces/job.interface";
+import { useNavigate } from "react-router-dom";
 
-const tasks = [
-  {
-    title: "Home Cleaning",
-    image: "public/homecleaner.webp", // Reemplaza con la URL real de la imagen
-    link: "#",
-  },
-  {
-    title: "Furniture Assembly",
-    image: "public/furniture_assembly.webp", // Reemplaza con la URL real de la imagen
-    link: "#",
-  },
-  {
-    title: "TV Mounting",
-    image: "public/tv_mounting.webp", // Reemplaza con la URL real de la imagen
-    link: "#",
-  },
-  {
-    title: "Wall Hanging",
-    image: "public/hanging.webp", // Reemplaza con la URL real de la imagen
-    link: "#",
-  },
-];
-const TaskSection = () => {
+const JobTypesSection = () => {
+  const [jobTypes, setJobTypes] = useState([] as JobType[]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchJobTypes = async () => {
+      try {
+        const response = await GetLimitJobTypes();
+        console.log("response", response);
+        console.log("response 2", response.data);
+
+        if (response) {
+          setJobTypes(response.data);
+        }
+        console.log(response);
+      } catch (error) {
+        console.error("Error in fetchJobTypes:", error);
+      }
+    };
+
+    fetchJobTypes();
+  }, []);
+
+  const handleCardClick = (jobTypeName: string, jobType: JobType) => {
+    navigate(`/services/${jobTypeName}`, { state: { jobType } });
+  };
+
   return (
     <Box as="section" py={8} px={60}>
       <Grid
@@ -44,9 +52,10 @@ const TaskSection = () => {
         }}
         gap={2}
       >
-        {tasks.map((task, index) => (
-          <GridItem key={index}>
+        {jobTypes.map((jobType) => (
+          <GridItem key={jobType.idJobType}>
             <Card.Root
+              onClick={() => handleCardClick(jobType.name, jobType)}
               border="1px solid"
               bgColor="white"
               maxW="xs"
@@ -57,14 +66,14 @@ const TaskSection = () => {
               transition="all 0.2s ease-in-out"
             >
               <Link
-                href={task.link}
+                // href={task.link}
                 textDecoration="none"
                 _hover={{ textDecoration: "none" }}
               >
                 <CardBody p={0}>
                   <Image
-                    src={task.image}
-                    alt={task.title}
+                    src="public/hanging.webp"
+                    alt={jobType.name}
                     width="100%"
                     height="auto"
                     objectFit="cover"
@@ -77,7 +86,7 @@ const TaskSection = () => {
                       display="flex"
                       alignItems="center"
                     >
-                      {task.title}
+                      {jobType.name}
                     </Text>
                   </Box>
                 </CardBody>
@@ -90,4 +99,4 @@ const TaskSection = () => {
   );
 };
 
-export default TaskSection;
+export default JobTypesSection;

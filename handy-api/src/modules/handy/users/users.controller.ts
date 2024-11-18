@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateNewJobRequestDTO } from './dtos/create-job-request.dto';
@@ -8,8 +8,13 @@ import { CreateNewJobRequestDTO } from './dtos/create-job-request.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/CreateReservation')
   async CreateJobRequest(@Body() bodyParams: CreateNewJobRequestDTO) {
     return this.usersService.CreateJobRequest(bodyParams);
+  }
+
+  @Get('/LimitJobTypes')
+  async GetLimitJobTypes() {
+    return this.usersService.GetLimitJobTypes();
   }
 }

@@ -148,7 +148,7 @@ export const EditJobRequestDialog = ({
             </Field>
           </Box>
           <Box mb={4}>
-            <Field label="Reservation Date">
+            <Field label="Observations">
               <Textarea
                 value={jobRequestData.observations}
                 onChange={(e) => handleChange("observations", e.target.value)}

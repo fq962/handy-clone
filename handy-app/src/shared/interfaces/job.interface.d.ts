@@ -16,3 +16,15 @@ export interface Handyman {
   value: string;
   label: string;
 }
+
+export interface JobType {
+  idJobType: number;
+  name: string;
+  description: string;
+  parent: JobTypeParent;
+}
+
+export interface JobTypeParent {
+  idJobType: number;
+  name: string;
+}

@@ -73,6 +73,7 @@ export class DB_CREATE_RESPONSE<T> {
 
   sendSuccessCreateResponse() {
     return {
+      isSuccess: true,
       message: `${this.dataName} sent correctly`,
       data: this.data,
     };

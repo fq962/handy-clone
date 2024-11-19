@@ -16,6 +16,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { showSuccessToast, ToastAlert } from "@/shared/utils/toast-alerts";
 
 export default function FormComponent() {
+  // const navigate = useNavigate();
   const { jobTypeName } = useParams<{ jobTypeName: string }>();
   const location = useLocation();
   const jobType = location.state?.jobType as JobType;
@@ -36,14 +37,17 @@ export default function FormComponent() {
   // Función para manejar el envío del formulario
   const handleSubmit = async () => {
     try {
-      return await PostNewReservation({
+      const createNewReservation = await PostNewReservation({
         idJobType: jobType.idJobType, // Supongo que "id" es una propiedad de `JobType`
         reservationDate: formData.reservationDate,
         reservationTime: formData.reservationTime,
         observations: formData.observations,
       });
 
-      showSuccessToast("Reservation created successfully");
+      if (createNewReservation.isSuccess) {
+        showSuccessToast("Reservation created successfully");
+        // navigate("/");
+      }
     } catch (error) {
       console.error("Failed to create reservation:", error);
     }

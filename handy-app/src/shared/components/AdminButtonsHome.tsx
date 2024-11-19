@@ -8,8 +8,8 @@ const AdminsButtonsHome = () => {
   const navigate = useNavigate();
   const { user } = useUser();
 
-  const navigateToMyRequests = () => {
-    navigate("/my-requests", {
+  const navigateToManageHandymen = () => {
+    navigate("/manage-handymen", {
       state: {
         user: {
           id: user?.id,
@@ -28,7 +28,7 @@ const AdminsButtonsHome = () => {
         bgColor={"white"}
         color={"black"}
         _hover={{ bg: "#8bc53e" }}
-        onClick={() => navigateToMyRequests()}
+        onClick={() => navigateToManageHandymen()}
       >
         Manage Handymen
       </Button>

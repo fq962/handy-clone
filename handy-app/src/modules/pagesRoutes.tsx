@@ -25,6 +25,7 @@ import JobTypeDetails from "./pages/all-services/JobTypeDetails";
 import { useUser, RedirectToSignIn } from "@clerk/clerk-react";
 import UserRequestsList from "./user/UserRequestsList";
 import JobRequestTable from "@/shared/components/JobRequestTable";
+import ManageHandymen from "./admin/ManageHandymen";
 
 // Componente para proteger rutas
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -73,6 +74,14 @@ const PagesRoutes: React.FC = () => (
       element={
         <ProtectedRoute>
           <JobRequestTable />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/manage-handymen"
+      element={
+        <ProtectedRoute>
+          <ManageHandymen />
         </ProtectedRoute>
       }
     />

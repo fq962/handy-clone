@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateNewJobRequestDTO } from './dtos/create-job-request.dto';
@@ -16,5 +16,10 @@ export class UsersController {
   @Get('/LimitJobTypes')
   async GetLimitJobTypes() {
     return this.usersService.GetLimitJobTypes();
+  }
+
+  @Get('/RequestedJobsByUser')
+  async GetAllRequestedJobsByUser(@Query('idUser') idUser: string) {
+    return this.usersService.GetAllRequestedJobsByUser(idUser);
   }
 }

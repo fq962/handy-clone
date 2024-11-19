@@ -20,6 +20,7 @@ export const useJobRequestUpdate = (
     setIsSaving(true);
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await UpdateJobRequest({
         idJobRequest: jobRequestData.idJobRequest,
         idStatus: Number(jobRequestData.idStatus),
@@ -28,7 +29,6 @@ export const useJobRequestUpdate = (
         reservationTime: jobRequestData.reservationTime,
         observations: jobRequestData.observations,
       });
-      console.log("Update successful:", response);
 
       // Llama a la función para volver a obtener los datos
       await fetchData();

@@ -23,4 +23,14 @@ export class AdminsController {
   async GetRequestedJobs() {
     return this.adminsService.GetRequestedJobs();
   }
+
+  @Get('/GetHandymen')
+  async GetHandymen() {
+    return this.adminsService.GetHandymen();
+  }
+
+  @Get('/GetStatus')
+  async GetStatus() {
+    return this.adminsService.GetStatus();
+  }
 }

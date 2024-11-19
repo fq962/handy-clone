@@ -81,4 +81,48 @@ export class AdminsService {
       'Selected',
     ).sendResponse();
   }
+
+  async GetHandymen() {
+    const { data, error } = await this.supabase
+      .schema(SCHEMA)
+      .rpc('ft_get_all_handymen');
+
+    if (error) {
+      return new DB_GET_RESPONSE(
+        null,
+        'Handymen Requested',
+        error,
+        'Error',
+      ).sendResponse();
+    }
+
+    return new DB_GET_RESPONSE(
+      data,
+      'Handymen Requested',
+      null,
+      'Selected',
+    ).sendResponse();
+  }
+
+  async GetStatus() {
+    const { data, error } = await this.supabase
+      .schema(SCHEMA)
+      .rpc('ft_get_jobs_status');
+
+    if (error) {
+      return new DB_GET_RESPONSE(
+        null,
+        'Status Requested',
+        error,
+        'Error',
+      ).sendResponse();
+    }
+
+    return new DB_GET_RESPONSE(
+      data,
+      'Status Requested',
+      null,
+      'Selected',
+    ).sendResponse();
+  }
 }

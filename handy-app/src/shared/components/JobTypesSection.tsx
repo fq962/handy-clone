@@ -22,13 +22,10 @@ const JobTypesSection = () => {
     const fetchJobTypes = async () => {
       try {
         const response = await GetLimitJobTypes();
-        console.log("response", response);
-        console.log("response 2", response.data);
 
         if (response) {
           setJobTypes(response.data);
         }
-        console.log(response);
       } catch (error) {
         console.error("Error in fetchJobTypes:", error);
       }

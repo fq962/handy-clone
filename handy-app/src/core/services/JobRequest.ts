@@ -1,7 +1,12 @@
 // src/services/apiService.js
 import axios from "axios";
 import { ApiResponse } from "@/shared/interfaces/api-response.interface";
-import { JobRequest, JobType } from "@/shared/interfaces/job.interface";
+import {
+  JobRequest,
+  JobStatus,
+  JobType,
+  RequestedJobByUser,
+} from "@/shared/interfaces/job.interface";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -57,6 +62,23 @@ export const GetLimitJobTypes = async (): Promise<ApiResponse<JobType[]>> => {
   }
 };
 
+export const GetAllRequestedJobsByUser = async (props: {
+  idUser: string;
+}): Promise<ApiResponse<RequestedJobByUser[]>> => {
+  const URL_TO_FETCH = `${VITE_API_URL}/users/RequestedJobsByUser`;
+
+  try {
+    const response = await axios.get<ApiResponse<RequestedJobByUser[]>>(
+      `${URL_TO_FETCH}?idUser=${props.idUser}`
+    );
+
+    return response.data; // Devuelve la respuesta en el formato esperado
+  } catch (error) {
+    console.error("Error in GetLimitJobTypes:", error);
+    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+  }
+};
+
 export const PostNewReservation = async (props: {
   idJobType: number;
   reservationDate: string;
@@ -79,6 +101,20 @@ export const PostNewReservation = async (props: {
     return response.data; // Devuelve la respuesta en el formato esperado
   } catch (error) {
     console.error("Error in CreateReservation:", error);
+    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+  }
+};
+export const GetStatus = async (): Promise<ApiResponse<JobStatus[]>> => {
+  const URL_TO_FETCH = `${VITE_API_URL}/admins/GetStatus`;
+
+  try {
+    const response = await axios.get<ApiResponse<JobStatus[]>>(
+      `${URL_TO_FETCH}`
+    );
+
+    return response.data; // Devuelve la respuesta en el formato esperado
+  } catch (error) {
+    console.error("Error in GetLimitJobTypes:", error);
     throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
   }
 };

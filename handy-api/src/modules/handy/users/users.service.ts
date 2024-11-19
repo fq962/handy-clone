@@ -45,4 +45,21 @@ export class UsersService {
 
     return new DB_GET_RESPONSE(data, 'Job Types', null, 'Get').sendResponse();
   }
+
+  async GetAllRequestedJobsByUser(idUser: string) {
+    const { data, error } = await this.supabase
+      .schema(SCHEMA)
+      .rpc('ft_get_all_requested_job_by_user', { p_id_user: idUser });
+
+    if (error) {
+      return new DB_GET_RESPONSE(
+        null,
+        'Job Types',
+        error,
+        'Error',
+      ).sendResponse();
+    }
+
+    return new DB_GET_RESPONSE(data, 'Job Types', null, 'Get').sendResponse();
+  }
 }

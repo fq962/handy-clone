@@ -23,6 +23,7 @@ import About from "./pages/about/About";
 import ServicesPage from "./pages/all-services/AllServices";
 import JobTypeDetails from "./pages/all-services/JobTypeDetails";
 import { useUser, RedirectToSignIn } from "@clerk/clerk-react";
+import UserRequestsList from "./user/UserRequestsList";
 
 // Componente para proteger rutas
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -55,6 +56,14 @@ const PagesRoutes: React.FC = () => (
       element={
         <ProtectedRoute>
           <JobTypeDetails />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/my-requests"
+      element={
+        <ProtectedRoute>
+          <UserRequestsList />
         </ProtectedRoute>
       }
     />

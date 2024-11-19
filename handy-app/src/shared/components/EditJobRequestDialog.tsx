@@ -25,10 +25,12 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "@/components/ui/select";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Field } from "@/components/ui/field";
-import { JobRequest } from "../interfaces/job.interface";
+import { Handymen, JobRequest, JobStatus } from "../interfaces/job.interface";
 import { useJobRequestUpdate } from "@/core/hooks/UseJobRequestUpdate";
+import { GetHandymen } from "@/core/services/Handymen";
+import { GetStatus } from "@/core/services/JobRequest";
 
 type EditDialogProps = {
   rowData: JobRequest;
@@ -43,13 +45,16 @@ export const EditJobRequestDialog = ({
 }: EditDialogProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const { updateJobRequest } = useJobRequestUpdate(onClose);
+  const [handymen, setHandymen] = useState([] as Handymen[]);
+  const [status, setStatus] = useState([] as JobStatus[]);
+
   // const [isOpen, setIsOpen] = useState(dialogOpen);
 
   // Estado único para el JSON
   const [jobRequestData, setJobRequestData] = useState({
     idJobRequest: rowData.idJobRequest,
-    idStatus: rowData.status.value,
-    idHandyman: rowData.handyman.value,
+    idStatus: rowData.status.value.toString(),
+    idHandyman: rowData.handyman?.value || null,
     reservationDate: rowData.reservationDate,
     reservationTime: rowData.reservationTime,
     observations: rowData.observations,
@@ -62,6 +67,27 @@ export const EditJobRequestDialog = ({
       [field]: value,
     }));
   };
+
+  useEffect(() => {
+    const fetchDropdowns = async () => {
+      try {
+        const FetchHandymen = await GetHandymen();
+        const FetchStatus = await GetStatus();
+
+        if (FetchStatus) {
+          setStatus(FetchStatus.data);
+        }
+
+        if (FetchHandymen) {
+          setHandymen(FetchHandymen.data);
+        }
+      } catch (error) {
+        console.error("Error in fetchHandymen:", error);
+      }
+    };
+
+    fetchDropdowns();
+  }, []);
 
   const handleSave = () => {
     updateJobRequest({
@@ -84,15 +110,15 @@ export const EditJobRequestDialog = ({
           <Box mb={4}>
             <Field label="Status">
               <SelectRoot
-                value={[jobRequestData.idStatus]}
+                value={[jobRequestData.idStatus.toString()]}
                 onValueChange={(e) => handleChange("idStatus", e.value[0])}
-                collection={statusOptions}
+                collection={createListCollection({ items: status })}
               >
                 <SelectTrigger>
                   <SelectValueText placeholder="Select status" />
                 </SelectTrigger>
                 <SelectContent bgColor={"white"} portalRef={contentRef}>
-                  {statusOptions.items.map((op) => (
+                  {status.map((op) => (
                     <SelectItem bgColor={"white"} key={op.value} item={op}>
                       {op.label}
                     </SelectItem>
@@ -104,21 +130,27 @@ export const EditJobRequestDialog = ({
           <Box mb={4}>
             <Field label="Handyman">
               <SelectRoot
-                value={[jobRequestData.idHandyman]}
+                value={
+                  jobRequestData.idHandyman
+                    ? [jobRequestData.idHandyman.toString()]
+                    : []
+                }
                 onValueChange={(e) => handleChange("idHandyman", e.value)}
-                collection={handymanOptions}
+                collection={createListCollection({
+                  items: handymen.map((handyman) => handyman.handyman),
+                })}
               >
                 <SelectTrigger>
                   <SelectValueText placeholder="Select handyman" />
                 </SelectTrigger>
                 <SelectContent bgColor={"white"} portalRef={contentRef}>
-                  {handymanOptions.items.map((handyman) => (
+                  {handymen.map((handyman) => (
                     <SelectItem
                       bgColor={"white"}
-                      key={handyman.value}
-                      item={handyman}
+                      key={handyman.handyman.value}
+                      item={handyman.handyman}
                     >
-                      {handyman.label}
+                      {handyman.handyman.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -169,19 +201,3 @@ export const EditJobRequestDialog = ({
     </DialogRoot>
   );
 };
-
-const statusOptions = createListCollection({
-  items: [
-    { value: "1", label: "Pending" },
-    { value: "2", label: "In Progress" },
-    { value: "3", label: "Completed" },
-  ],
-});
-
-const handymanOptions = createListCollection({
-  items: [
-    { label: "David Fernando Quintanilla", value: "6" },
-    { label: "Jane Smith", value: "2" },
-    { label: "Mike Johnson", value: "3" },
-  ],
-});

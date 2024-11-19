@@ -7,6 +7,26 @@ export interface JobRequest {
   observations: string;
 }
 
+export interface RequestedJobByUser {
+  idJobRequest: number;
+  createdAt: JobStatus;
+  jobName: string;
+  handyman: Handyman;
+  reservationDateTime: string;
+  observations: string;
+  status: JobStatus;
+}
+
+export interface Handymen {
+  idHandyman: number;
+  handymanName: JobStatus;
+  birthday: string;
+  handyman: Handyman;
+  observations: string;
+  expertise: string;
+  mail: string;
+  rating: number;
+}
 export interface JobStatus {
   value: string;
   label: string;

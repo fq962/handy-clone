@@ -1,4 +1,3 @@
-
 # Handy Clone
 
 A service marketplace clone inspired by Handy, connecting users with local service providers. This monorepo contains both the frontend and backend, making it easy to manage and deploy.
@@ -12,6 +11,7 @@ A service marketplace clone inspired by Handy, connecting users with local servi
    - [Installation](#installation)
    - [Running Locally](#running-locally)
 4. [Folder Structure](#folder-structure)
+
 ---
 
 ## Features
@@ -43,17 +43,20 @@ Follow these steps to set up the project locally.
 ### Prerequisites
 
 Ensure you have the following installed on your system:
+
 - [Node.js](https://nodejs.org/) (v20 or later)
 - [npm](https://www.npmjs.com/)
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/fq962/handy-clone.git
    ```
 
 2. Navigate into the project directory:
+
    ```bash
    cd handy-clone
    ```
@@ -66,21 +69,32 @@ Ensure you have the following installed on your system:
 ### Running Locally
 
 1. Start the frontend:
+
    ```bash
    npm run dev:app
    ```
 
 2. Start the backend:
+
    ```bash
    npm run dev:api
    ```
 
 3. Open your browser and navigate to:
+
    ```
    http://localhost:5173/
    ```
 
    The API will run on a separate port (check your setup or configuration files for details).
+
+---
+
+### Default Accounts
+
+1. Normal User: user@test.com / Pass -> .User123456@@
+
+2. Admin User: admin@test.com / Pass -> .Admin123456@@
 
 ---
 

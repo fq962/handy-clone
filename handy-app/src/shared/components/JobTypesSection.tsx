@@ -40,6 +40,9 @@ const JobTypesSection = () => {
 
   return (
     <Box as="section" py={8} px={60}>
+      <Text fontSize="xl" fontWeight="bold" mb={4}>
+        Services Available
+      </Text>
       <Grid
         templateColumns={{
           base: "1fr",

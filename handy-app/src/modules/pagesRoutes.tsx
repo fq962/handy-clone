@@ -20,7 +20,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
-import ServicesPage from "./pages/all-services/AllServices";
 import JobTypeDetails from "./pages/all-services/JobTypeDetails";
 import { useUser, RedirectToSignIn } from "@clerk/clerk-react";
 import UserRequestsList from "./user/UserRequestsList";
@@ -45,14 +44,6 @@ const PagesRoutes: React.FC = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
-    <Route
-      path="/services"
-      element={
-        <ProtectedRoute>
-          <ServicesPage />
-        </ProtectedRoute>
-      }
-    />
     <Route
       path="/services/:jobTypeName"
       element={

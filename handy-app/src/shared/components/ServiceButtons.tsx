@@ -37,18 +37,6 @@ const ServiceButtons = () => {
           My Requests
         </Button>
       )}
-      <Button
-        bgColor={"#00cded"}
-        color={"black"}
-        variant="outline"
-        size="lg"
-        // leftIcon={<Icon as={FaTools} />}
-        p={8}
-        _hover={{ bg: "#00cbff" }}
-        onClick={() => navigate("/services")}
-      >
-        All Services
-      </Button>
     </Flex>
   );
 };

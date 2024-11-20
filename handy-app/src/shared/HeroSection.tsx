@@ -8,8 +8,9 @@ const HeroSection = () => {
         The easy, reliable way to take care of your home.
       </Heading>
       <Text fontSize="lg" color="gray.600">
-        Instantly book highly rated pros for cleaning and handyman tasks at an
-        upfront price.
+        Your happiness is our goal. If you’re not happy, we’ll work to make it
+        right. Our friendly customer service agents are available 24 hours a
+        day, 7 days a week.
       </Text>
     </Box>
   );

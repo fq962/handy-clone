@@ -90,11 +90,13 @@ Ensure you have the following installed on your system:
 
 ---
 
-### Default Accounts
+### Default Accounts IMPORTANT!
 
 1. Normal User: user@test.com / Pass -> .User123456@@
 
 2. Admin User: admin@test.com / Pass -> .Admin123456@@
+
+3. NOTE!: If you create an account, contact the administrator to add you to the organization
 
 ---
 

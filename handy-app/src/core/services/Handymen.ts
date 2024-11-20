@@ -16,6 +16,36 @@ export const GetHandymen = async (): Promise<ApiResponse<Handymen[]>> => {
     return response.data; // Devuelve la respuesta en el formato esperado
   } catch (error) {
     console.error("Error in GetHandymen:", error);
-    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+    throw error;
+  }
+};
+
+export const CreateNewHandymen = async (props: {
+  firstName: string;
+  secondName: string;
+  birthday: string;
+  mail: string;
+  rating: number;
+  expertise: string;
+  observations: string;
+  skills?: string[];
+}): Promise<ApiResponse<unknown>> => {
+  const URL_TO_FETCH = `${VITE_API_URL}/admins/CreateHandyman`;
+
+  try {
+    const response = await axios.post<ApiResponse<unknown>>(
+      URL_TO_FETCH,
+      props,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error in CreateHandyman:", error);
+    throw error;
   }
 };

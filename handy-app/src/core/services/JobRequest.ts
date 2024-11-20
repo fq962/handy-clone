@@ -72,10 +72,10 @@ export const GetAllRequestedJobsByUser = async (props: {
       `${URL_TO_FETCH}?idUser=${props.idUser}`
     );
 
-    return response.data; // Devuelve la respuesta en el formato esperado
+    return response.data;
   } catch (error) {
     console.error("Error in GetLimitJobTypes:", error);
-    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+    throw error;
   }
 };
 
@@ -98,10 +98,10 @@ export const PostNewReservation = async (props: {
       }
     );
 
-    return response.data; // Devuelve la respuesta en el formato esperado
+    return response.data;
   } catch (error) {
     console.error("Error in CreateReservation:", error);
-    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+    throw error;
   }
 };
 export const GetStatus = async (): Promise<ApiResponse<JobStatus[]>> => {
@@ -112,9 +112,9 @@ export const GetStatus = async (): Promise<ApiResponse<JobStatus[]>> => {
       `${URL_TO_FETCH}`
     );
 
-    return response.data; // Devuelve la respuesta en el formato esperado
+    return response.data;
   } catch (error) {
     console.error("Error in GetLimitJobTypes:", error);
-    throw error; // Lanza el error para que pueda ser manejado por el código que lo llama
+    throw error;
   }
 };

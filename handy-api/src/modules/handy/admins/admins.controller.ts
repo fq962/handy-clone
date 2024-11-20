@@ -9,7 +9,7 @@ import { UpdateJobRequestDTO } from './dto/update-job-request.dto';
 export class AdminsController {
   constructor(private readonly adminsService: AdminsService) {}
 
-  @Post()
+  @Post('/CreateHandyman')
   async CreateHandyman(@Body() bodyParams: CreateNewHandymanDTO) {
     return this.adminsService.CreateHandyman(bodyParams);
   }

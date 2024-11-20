@@ -80,6 +80,7 @@ export const GetAllRequestedJobsByUser = async (props: {
 };
 
 export const PostNewReservation = async (props: {
+  userId: string;
   idJobType: number;
   reservationDate: string;
   reservationTime: string;

@@ -4,6 +4,15 @@ import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
 
 export class CreateNewJobRequestDTO {
   @ApiProperty({
+    description: 'User ID',
+    example: 'asdasdeq2w_!2341',
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
+
+  @ApiProperty({
     description: 'Id of the job type is going to be requested',
     example: 4,
     required: true,

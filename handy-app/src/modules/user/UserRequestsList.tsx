@@ -30,7 +30,7 @@ export default function UserRequestsList() {
     };
 
     fetchRequestedJobs();
-  });
+  }, [userInfo?.id]);
 
   return (
     <>

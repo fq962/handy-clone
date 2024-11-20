@@ -14,12 +14,14 @@ import {
 import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { showSuccessToast, ToastAlert } from "@/shared/utils/toast-alerts";
+import { useUser } from "@clerk/clerk-react";
 
 export default function FormComponent() {
   // const navigate = useNavigate();
   const { jobTypeName } = useParams<{ jobTypeName: string }>();
   const location = useLocation();
   const jobType = location.state?.jobType as JobType;
+  const { user } = useUser();
 
   const [formData, setFormData] = useState({
     reservationDate: "",
@@ -38,7 +40,8 @@ export default function FormComponent() {
   const handleSubmit = async () => {
     try {
       const createNewReservation = await PostNewReservation({
-        idJobType: jobType.idJobType, // Supongo que "id" es una propiedad de `JobType`
+        userId: user!.id,
+        idJobType: jobType.idJobType,
         reservationDate: formData.reservationDate,
         reservationTime: formData.reservationTime,
         observations: formData.observations,
@@ -97,9 +100,9 @@ export default function FormComponent() {
             <HStack mb={6}>
               <Field label="Reservation Date">
                 <Input
+                  bg={"gray.400"}
                   type="date"
                   placeholder="Select Date"
-                  bg="white"
                   border="1px solid"
                   borderColor="#babbbd"
                   color="black"
@@ -114,6 +117,7 @@ export default function FormComponent() {
               </Field>
               <Field label="Reservation Time">
                 <Input
+                  bg={"gray.400"}
                   type="time"
                   value={formData.reservationTime}
                   onChange={(e) =>
@@ -136,8 +140,6 @@ export default function FormComponent() {
               _focus={{ borderColor: "#98cc53", boxShadow: "none" }}
               value={formData.observations}
               onChange={(e) => handleChange("observations", e.target.value)}
-              // value={jobRequestData.observations}
-              // onChange={(e) => handleChange("observations", e.target.value)}
             />
 
             {/* Send Button */}

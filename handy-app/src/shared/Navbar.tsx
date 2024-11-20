@@ -1,6 +1,6 @@
 // src/components/Navbar.tsx
 import { Button } from "@/components/ui/button";
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { SignInButton, SignOutButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
@@ -24,20 +24,6 @@ const Navbar = () => {
 
         {/* Right Links */}
         <Flex gap={8} align="center">
-          <Link
-            fontWeight="medium"
-            color="gray.600"
-            _hover={{ color: "gray.800" }}
-          >
-            Become a Pro
-          </Link>
-          <Link
-            fontWeight="medium"
-            color="gray.600"
-            _hover={{ color: "gray.800" }}
-          >
-            Help
-          </Link>
           {!isSignedIn ? (
             // Botón de inicio de sesión si no está autenticado
             <SignInButton>

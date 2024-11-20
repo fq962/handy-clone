@@ -1,4 +1,3 @@
-// src/components/TaskSection.tsx
 import { GetLimitJobTypes } from "@/core/services/JobRequest";
 import {
   Box,
@@ -39,8 +38,13 @@ const JobTypesSection = () => {
   };
 
   return (
-    <Box as="section" py={8} px={60}>
-      <Text fontSize="xl" fontWeight="bold" mb={4}>
+    <Box as="section" py={8} px={{ base: 4, sm: 8, md: 16, lg: 60 }}>
+      <Text
+        fontSize={{ base: "lg", sm: "xl" }}
+        fontWeight="bold"
+        mb={4}
+        textAlign={{ base: "center", sm: "left" }}
+      >
         Services Available
       </Text>
       <Grid
@@ -50,7 +54,7 @@ const JobTypesSection = () => {
           md: "repeat(3, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
-        gap={2}
+        gap={{ base: 4, sm: 6, md: 8 }}
       >
         {jobTypes.map((jobType) => (
           <GridItem key={jobType.idJobType}>
@@ -58,33 +62,31 @@ const JobTypesSection = () => {
               onClick={() => handleCardClick(jobType.name, jobType)}
               border="1px solid"
               bgColor="white"
-              maxW="xs"
+              maxW="100%"
               borderRadius="lg"
               overflow="hidden"
               boxShadow="sm"
               _hover={{ boxShadow: "lg", transform: "scale(1.02)" }}
               transition="all 0.2s ease-in-out"
             >
-              <Link
-                // href={task.link}
-                textDecoration="none"
-                _hover={{ textDecoration: "none" }}
-              >
+              <Link textDecoration="none" _hover={{ textDecoration: "none" }}>
                 <CardBody p={0}>
                   <Image
                     src="public/hanging.webp"
                     alt={jobType.name}
                     width="100%"
-                    height="auto"
+                    height="200px"
                     objectFit="cover"
                   />
                   <Box p={4}>
                     <Text
-                      fontSize="lg"
+                      fontSize={{ base: "md", sm: "lg" }}
                       fontWeight="medium"
                       color="black"
                       display="flex"
                       alignItems="center"
+                      justifyContent="center"
+                      textAlign="center"
                     >
                       {jobType.name}
                     </Text>
